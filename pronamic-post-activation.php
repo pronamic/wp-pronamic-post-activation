@@ -68,7 +68,7 @@ function pronamic_post_activation_link( $post_id, $action, $content ) {
 	$meta_key = pronamic_post_activation_meta_key();
 	$activation_key = get_post_meta( $post_id, $meta_key, true );
 
-	if ( ! empty( $meta_value ) ) {
+	if ( ! empty( $activation_key ) ) {
 		$url = add_query_arg( array(
 			'id' => $post_id , 
 			'key' => $activation_key , 
