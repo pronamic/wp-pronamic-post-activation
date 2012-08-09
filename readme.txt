@@ -10,6 +10,23 @@ The Pronamic Post Activation plugin allows you to activate and deactivate posts 
 
 == Description ==
 
+= Shortcodes =
+
+*	**Activate link**
+	
+		[pronamic_post_activate_link post_id="1234"]Activate post[/pronamic_activate_link]
+
+	In Gravity Forms post create form notification e-mails you could use the following shortcode:
+
+		[pronamic_post_activate_link post_id="{post_id]"]Activate post[/pronamic_activate_link]
+
+*	**Activate link**
+	
+		[pronamic_post_deactivate_link post_id="1234"]Deactivate post[/pronamic_activate_link]
+
+	In Gravity Forms post create form notification e-mails you could use the following shortcode:
+
+		[pronamic_post_deactivate_link post_id="{post_id]"]Deactivate post[/pronamic_activate_link]
 
 
 == Installation ==
