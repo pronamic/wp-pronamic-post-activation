@@ -62,8 +62,16 @@ add_action( 'gform_post_data', 'pronamic_post_activation_gform_post_data', 10, 3
  * @param string $action
  * @param string $content
  */
-function pronamic_post_activation_link( $post_id, $action, $content ) {
+function pronamic_post_activation_link( $entry_id, $post_id, $action, $content ) {
 	$result = null;
+
+	if ( method_exists( 'RGFormsModel', 'get_lead' ) ) {
+		$lead = RGFormsModel::get_lead( $entry_id );
+
+		if ( empty( $post_id ) && isset( $lead['post_id'] ) ) {
+			$post_id = $lead['post_id'];
+		}
+	}
 
 	$meta_key = pronamic_post_activation_meta_key();
 	$activation_key = get_post_meta( $post_id, $meta_key, true );
@@ -89,10 +97,11 @@ function pronamic_post_activation_link( $post_id, $action, $content ) {
  */
 function pronamic_post_activation_activate_link( $atts, $content ) {
 	extract( shortcode_atts( array(
-		'post_id' => null
+		'entry_id' => null,
+		'post_id'  => null,
 	), $atts ) );
 
-	return pronamic_post_activation_link( $post_id, 'activate', $content );
+	return pronamic_post_activation_link( $entry_id, $post_id, 'activate', $content );
 }
 
 add_shortcode( 'pronamic_post_activate_link', 'pronamic_post_activation_activate_link' );
@@ -105,10 +114,11 @@ add_shortcode( 'pronamic_post_activate_link', 'pronamic_post_activation_activate
  */
 function pronamic_post_activation_deactivate_link( $atts, $content ) {
 	extract( shortcode_atts( array(
-		'post_id' => null
+		'entry_id' => null,
+		'post_id'  => null,
 	), $atts ) );
 
-	return pronamic_post_activation_link( $post_id, 'deactivate', $content );
+	return pronamic_post_activation_link( $entry_id, $post_id, 'deactivate', $content );
 }
 
 add_shortcode( 'pronamic_post_deactivate_link', 'pronamic_post_activation_deactivate_link' );
